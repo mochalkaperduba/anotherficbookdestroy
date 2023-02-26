@@ -87,10 +87,11 @@ async function spam(login, pass, names, descs, tos, comms){
     await Login(login, pass);
     fics = [];
     for(let i = 0; i<names.length; i++){
+        try{
         let w = new Fic();
         await w.create(names[i], randel(descs), randel(tos), randel(comms));
         fics.push(w);
-        await sleep(2000);
+        await sleep(2000);}catch{await sleep(rnd(20000,100000));}
     }
     let i = 0;
     while (true){
