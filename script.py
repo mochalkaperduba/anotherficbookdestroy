@@ -34,6 +34,7 @@ base64_message = base64_bytes.decode('ascii')
 
 print(base64_message)
 
+d.set_script_timeout(6*1000*60)
 d.execute_script(js)
 
 #time.sleep(2*60)
