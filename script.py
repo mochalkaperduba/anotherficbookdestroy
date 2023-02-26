@@ -6,7 +6,7 @@ import base64
 
 def loadarr(path):
   res = '['
-  names = open('names.txt',mode='r',encoding="utf8")
+  names = open('names.txt',mode='r',encoding="utf-8")
   rln = names.readlines()
   for w in rln:
     res+='\"'
@@ -21,7 +21,7 @@ chrome_options.add_argument("--disable-web-security")
 d = chr.Chrome(version_main = 109, options = chrome_options)
 d.get("https://ficbook.net")
 
-f = open("1.js", "r", encoding='utf8')
+f = open("1.js", "r", encoding='utf-8')
 js = f.read()
 f.close()
 
