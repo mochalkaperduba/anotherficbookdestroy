@@ -10,7 +10,7 @@ def loadarr(path):
   rln = names.readlines()
   for w in rln:
     res+='\"'
-    res+=rl.replace("\n", "")
+    res+=w.replace("\n", "")
     res+='\",'
   res += '\"й и ц\"'
   res += ']'
