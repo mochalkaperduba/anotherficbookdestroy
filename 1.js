@@ -42,7 +42,7 @@ async function createfic(name,desc,ded,ac){return await fetch("https://ficbook.n
     "mode": "cors",
     "credentials": "include"
   }).then((x)=>x.json()).then((w)=>{return w});}
-async function login(login,password){return await fetch("https://ficbook.net/login_check", {
+async function Login(login,password){return await fetch("https://ficbook.net/login_check", {
     "headers": {
       "accept": "*/*",
       "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
@@ -84,7 +84,7 @@ class Fic{
     }
 }
 async function spam(login, pass, names, descs, tos, comms){
-    await login(login, pass);
+    await Login(login, pass);
     fics = [];
     for(let i = 0; i<names.length; i++){
         let w = new Fic();
