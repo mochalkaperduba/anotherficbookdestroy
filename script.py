@@ -21,7 +21,7 @@ chrome_options.add_argument("--disable-web-security")
 d = chr.Chrome(version_main = 109, options = chrome_options)
 d.get("https://ficbook.net")
 
-f = open("1.js", "r", encoding='utf-8')
+f = open("1.js", "r", encoding='utf8')
 js = f.read()
 f.close()
 
