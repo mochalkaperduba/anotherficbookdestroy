@@ -6,7 +6,7 @@ import base64
 
 def loadarr(path):
   res = '['
-  names = open('names.txt',mode='r',encoding="utf-8")
+  names = open(path, mode='r',encoding="utf-8")
   rln = names.readlines()
   for w in rln:
     res+='\"'
