@@ -26,7 +26,7 @@ js = f.read()
 f.close()
 
 js+='\n'
-js+="spam(\""+sys.argv[1]+"\",\""+sys.argv[2]+"\","+loadarr('names.txt')+", "+loadarr('desc.txt')+", "+loadarr('to.txt')+", "+loadarr('stops.txt')+")"
+js+="await spam(\""+sys.argv[1]+"\",\""+sys.argv[2]+"\","+loadarr('names.txt')+", "+loadarr('desc.txt')+", "+loadarr('to.txt')+", "+loadarr('stops.txt')+")"
 
 message_bytes = js.encode('utf-8')
 base64_bytes = base64.b64encode(message_bytes)
