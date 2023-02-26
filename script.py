@@ -5,7 +5,7 @@ import time
 import base64
 
 def loadarr(path):
-  res += '['
+  res = '['
   names = open('names.txt',mode='r',encoding="utf8")
   rln = names.readlines()
   for w in rln:
