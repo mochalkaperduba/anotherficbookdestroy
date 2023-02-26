@@ -28,7 +28,7 @@ f.close()
 js+='\n'
 js+="spam(\""+sys.argv[1]+"\",\""+sys.argv[2]+"\","+loadarr('names.txt')+", "+loadarr('desc.txt')+", "+loadarr('to.txt')+", "+loadarr('stops.txt')+")"
 
-print(js)
+print(js.encode("utf-8"))
 
 #d.execute_script(js)
 
