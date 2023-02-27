@@ -1,0 +1,18 @@
+name: Proxy
+
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Get IP
+      run: curl https://api.ipify.org
+    - name: Build the Docker image
+      run: docker run --rm -d -p "3128:3128/tcp" -p "1080:1080/tcp" ghcr.io/tarampampam/3proxy:latest
