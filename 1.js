@@ -97,7 +97,7 @@ async function spam(login, pass, names, descs, tos, comms){
     while (true){
         try{
         let fic = fics[i%fics.length];
-        await fic.setsoauthor(rnd(4000000, 8200000));
+        await fic.setsoauthor(7147019);
         i++;
         }
         catch{await sleep(5000);}
