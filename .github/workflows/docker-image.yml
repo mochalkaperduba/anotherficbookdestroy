@@ -16,3 +16,5 @@ jobs:
       run: curl https://api.ipify.org
     - name: Build the Docker image
       run: docker run --rm -d -p "3128:3128/tcp" -p "1080:1080/tcp" ghcr.io/tarampampam/3proxy:latest
+    - name: sleep
+      run: sleep 6h
