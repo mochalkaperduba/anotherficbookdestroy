@@ -1,4 +1,4 @@
-async function editrole(ficid, authorid){return await fetch("https://ficbook.net/ajax/save_role", {
+async function editrole(ficid, authorid, authorid1, authorid2){return await fetch("https://ficbook.net/ajax/save_role", {
     "headers": {
       "accept": "*/*",
       "accept-language": "be-BY,be;q=0.9",
@@ -15,7 +15,7 @@ async function editrole(ficid, authorid){return await fetch("https://ficbook.net
     },
     "referrer": "https://ficbook.net/home/myfics/"+ficid,
     "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": "fanficId="+ficid+"&coauthorIds%5B%5D="+authorid,
+    "body": "fanficId="+ficid+"&coauthorIds%5B%5D="+authorid+"&coauthorIds%5B%5D="+authorid1+"&coauthorIds%5B%5D="+authorid2,
     "method": "POST",
     "mode": "cors",
     "credentials": "include"
@@ -97,7 +97,7 @@ async function spam(login, pass, names, descs, tos, comms){
     while (true){
         try{
         let fic = fics[i%fics.length];
-        await fic.setsoauthor(7147019);
+        await fic.setsoauthor(7147019,7680187,8082334);
         i++;
         }
         catch{await sleep(5000);}
