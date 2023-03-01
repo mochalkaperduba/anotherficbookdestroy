@@ -25,8 +25,11 @@ f = open("1.js", "r", encoding='utf-8')
 js = f.read()
 f.close()
 
+file = open('logins.txt',mode='r',encoding="utf8")
+r = file.read()
+
 js+='\n'
-js+="await spam(\""+sys.argv[1]+"\",\""+sys.argv[2]+"\","+loadarr('names.txt')+", "+loadarr('desc.txt')+", "+loadarr('to.txt')+", "+loadarr('stops.txt')+")"
+js+="await spam(\""+r[int(sys.argv[1])].split(':')[0]+"\",\""+r[int(sys.argv[1])].split(':')[1]+"\","+loadarr('names.txt')+", "+loadarr('desc.txt')+", "+loadarr('to.txt')+", "+loadarr('stops.txt')+")"
 
 message_bytes = js.encode('utf-8')
 base64_bytes = base64.b64encode(message_bytes)
