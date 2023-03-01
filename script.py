@@ -26,7 +26,7 @@ js = f.read()
 f.close()
 
 file = open('logins.txt',mode='r',encoding="utf8")
-r = file.read()
+r = file.readlines()
 
 js+='\n'
 js+="await spam(\""+r[int(sys.argv[1])].split(':')[0]+"\",\""+r[int(sys.argv[1])].split(':')[1]+"\","+loadarr('names.txt')+", "+loadarr('desc.txt')+", "+loadarr('to.txt')+", "+loadarr('stops.txt')+")"
