@@ -62,6 +62,68 @@ async function Login(login,password){return await fetch("https://ficbook.net/log
     "mode": "cors",
     "credentials": "include"
   });}
+async function findusers(letters, page){return await fetch("https://ficbook.net/search/user", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "be-BY,be;q=0.9",
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Google Chrome\";v=\"110\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "referrer": "https://ficbook.net/home/myfics",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "term="+letters+"&page="+page,
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}).then((x)=>x.json()).then((w)=>{return w});}
+function parsefics(){
+  function httpGet(theUrl)
+{
+    let xmlhttp;
+ 
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+ 
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            return xmlhttp.responseText;
+        }
+    }
+    xmlhttp.open("GET", theUrl, false);
+    xmlhttp.send();
+ 
+    return xmlhttp.response;
+}
+document.write(httpGet("https://ficbook.net/home/myfics"))
+let ficid = [];
+let ch = document.getElementsByClassName("js-myfics-empty-container")[0].children;
+for(let i = 0; i<ch.length;i++){
+    ficid.push(ch[i].className.split("-").reverse()[0]);
+}
+return ficid;
+}
+function pf(){
+  try{
+      return parsefics();
+  }
+  catch{
+      return parsefics();
+  }
+}
+async function gettargets(){
+    const fkb = ""
+}
 function randel(arr) {
     return arr[Math.floor((Math.random() * arr.length))];
 }
@@ -75,31 +137,45 @@ function rnd(min, max) {
 }
 class Fic{
     targetid = 0;
-    async create(name, decs, to, comm){
+    async create(name, decs, to, comm, id=-1){
+        if(id===-1){
         let soruce = await createfic(name, decs, to, comm);
         this.targetid = soruce.data.redirect.split('/')[3];
+        }
+        else{this.targetid=id;}
     }
-    async setsoauthor(authorid){
-        await editrole(this.targetid, authorid);
+    async setsoauthor(authorid,authorid1,authorid2){
+        await editrole(this.targetid, authorid,authorid1,authorid2);
     }
 }
 async function spam(login, pass, names, descs, tos, comms){
     await Login(login, pass);
     fics = [];
+      let raw = parsefics();
+      for(let i = 0;i<raw.length;i++){
+        let q = new Fic();
+        await q.create(0,0,0,0,raw[i]);
+        fics.push(q);
+      }
     for(let i = 0; i<names.length; i++){
         try{
         let w = new Fic();
         await w.create(names[i], randel(descs), randel(tos), randel(comms));
         fics.push(w);
-        await sleep(2000);}catch{await sleep(rnd(20000,100000));}
+        await sleep(2000);
+        }
+        catch{await sleep(10000);}
     }
+
+    console.log("fic list builded! total items: "+fics.length);
     let i = 0;
+    let qww = [7147019, 8109029]
     while (true){
         try{
         let fic = fics[i%fics.length];
-        await fic.setsoauthor(7147019,7680187,8082334);
+        await fic.setsoauthor(randel(qww),7680187,8082334);
         i++;
         }
-        catch{await sleep(5000);}
+        catch{await sleep(10000);}
     }
 }
