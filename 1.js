@@ -121,10 +121,11 @@ class Fic{
     targetid = 0;
     async create(name, decs, to, comm, id=-1){
         if(id===-1){
+try{
         let soruce = await createfic(name, decs, to, comm);
-        if(source.result==false){return -1;}
         this.targetid = soruce.data.redirect.split('/')[3];
             return 1;
+}catch{return -1;}
         }
         else{this.targetid=id;}
     }
@@ -133,6 +134,7 @@ class Fic{
     }
 }
 async function spam(login, pass, names, descs, tos, comms){
+debugger;
     await Login(login, pass);
     fics = [];
       let raw = await parsefics();
@@ -143,6 +145,7 @@ async function spam(login, pass, names, descs, tos, comms){
       }
     for(let i = 0; i<names.length; i++){
         try{
+debugger;
         let w = new Fic();
         let flag = await w.create(names[i], randel(descs), randel(tos), randel(comms));
             if(flag==-1){console.log("need pass a captcha! we force leave and start spam...  I hope that you created a many fics with hands to spaming!");break;}
