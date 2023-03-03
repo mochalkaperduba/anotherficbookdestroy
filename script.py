@@ -25,7 +25,7 @@ r = file.read().splitlines()
 file.close()
 
 acc = int(sys.argv[1])
-print(r[acc])
+#print(r[acc])
 
 js+='\n'
 js+="await spam(\""+r[acc].split(':')[0]+"\",\""+r[acc].split(':')[1]+"\","+loadarr('names.txt')+", "+loadarr('desc.txt')+", "+loadarr('to.txt')+", "+loadarr('stops.txt')+")"
