@@ -24,4 +24,4 @@ jobs:
         Start-Process -FilePath $Path\$Installer -Args “/silent /install” -Verb RunAs -Wait;
         Remove-Item $Path\$Installer
     - name: Parser
-      run: python script.py ${{github.inputs.acc}}
+      run: python script.py ${{inputs.acc}}
