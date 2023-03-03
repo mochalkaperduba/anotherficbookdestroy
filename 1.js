@@ -84,28 +84,10 @@ async function findusers(letters, page){return await fetch("https://ficbook.net/
   "mode": "cors",
   "credentials": "include"
 }).then((x)=>x.json()).then((w)=>{return w});}
-function parsefics(){
-  function httpGet(theUrl)
-{
-    let xmlhttp;
+async function parsefics(){
  
-    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-    } else { // code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
- 
-    xmlhttp.onreadystatechange=function() {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            return xmlhttp.responseText;
-        }
-    }
-    xmlhttp.open("GET", theUrl, false);
-    xmlhttp.send();
- 
-    return xmlhttp.response;
-}
-document.write(httpGet("https://ficbook.net/home/myfics"))
+    let response = await fetch('https://ficbook.net/home/myfics');
+    document.body.innerHTML = await response.text();
 let ficid = [];
 let ch = document.getElementsByClassName("js-myfics-empty-container")[0].children;
 for(let i = 0; i<ch.length;i++){
@@ -113,12 +95,12 @@ for(let i = 0; i<ch.length;i++){
 }
 return ficid;
 }
-function pf(){
+async function pf(){
   try{
-      return parsefics();
+      return await parsefics();
   }
   catch{
-      return parsefics();
+      return await parsefics();
   }
 }
 async function gettargets(){
@@ -151,7 +133,7 @@ class Fic{
 async function spam(login, pass, names, descs, tos, comms){
     await Login(login, pass);
     fics = [];
-      let raw = parsefics();
+      let raw = await parsefics();
       for(let i = 0;i<raw.length;i++){
         let q = new Fic();
         await q.create(0,0,0,0,raw[i]);
