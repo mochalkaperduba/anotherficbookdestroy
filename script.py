@@ -18,7 +18,10 @@ def loadarr(path):
 
 def gethtml(d):
   d.get("https://ficbook.net/home/myfics")
-  print(d.page_source)
+  try:
+    print(d.page_source)
+  except:
+    print("unicode symbols!")
 
 f = open("1.js", "r", encoding='utf-8')
 js = f.read()
