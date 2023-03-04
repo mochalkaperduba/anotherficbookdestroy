@@ -25,7 +25,7 @@ async function editrole(ficid, authorids){
     "method": "POST",
     "mode": "cors",
     "credentials": "include"
-  }).then((x)=>x.json()).then((w)=>{return w});}
+  }).then((x)=>{if(x.status==500){throw -1;}x.json();}).then((w)=>{return w});}
 async function createfic(name,desc,ded,ac){return await fetch("https://ficbook.net/home/addfic_save", {
     "headers": {
       "accept": "*/*",
@@ -152,7 +152,6 @@ function getuser(){
 }
 async function spam(login, pass, names, descs, tos, comms){
     shuffleArray(names);
-debugger;
     await Login(login, pass);
     fics = [];
       let raw = await parsefics();
@@ -163,7 +162,6 @@ debugger;
       }
     for(let i = 0; i<names.length; i++){
         try{
-debugger;
         let w = new Fic();
         let flag = await w.create(names[i], randel(descs), randel(tos), randel(comms));
             if(flag==-1){console.log("need pass a captcha! we force leave and start spam...  I hope that you created a many fics with hands to spaming!");break;}
@@ -184,8 +182,9 @@ debugger;
         let newu = getuser();
         await fic.setsoauthor(targets.concat(newu, randel(spec)));
         i++;
+            targets.push(newu);
         }
-        catch{await sleep(10000);}
-        if(i>10){break;}
+        catch(q){if(q==-1){continue;}else{await sleep(10000);}}
+        if(i>8000){break;}
     }
 }
