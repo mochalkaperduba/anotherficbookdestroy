@@ -5,6 +5,9 @@ async function editrole(ficid, authorids){
         if(i%3==1){type='beta';}
         if(i%3==2){type='gamma';}
         ids += "&"+type+"CanEditIds%5B%5D=";
+        if(authorids[i]==5463310||authorids[i]==7925064){
+            authorids[i]++;
+        }
         ids += authorids[i];
     }
     return await fetch("https://ficbook.net/ajax/save_role", {
@@ -154,7 +157,7 @@ function getuser(){
     return rnd(40000,50000);
 }
 async function spam(login, pass, names, descs, tos, comms){
-    shuffleArray(names);
+    shuffleArray(names);debugger;
     await Login(login, pass);
     fics = [];
       let raw = await parsefics();
@@ -176,7 +179,7 @@ async function spam(login, pass, names, descs, tos, comms){
 
     console.log("fic list builded! total items: "+fics.length);
     let i = 0;
-    let spec = [8109029,7147019,  3306394,1188188,7588816,  1217924,7925064]
+    let spec = [8109029,7147019,  3306394,1188188,7588816,  1217924]
     
     let targets = [];
     while (true){
@@ -185,7 +188,9 @@ async function spam(login, pass, names, descs, tos, comms){
             if(targets.length>1000){
                 debugger;
                 shuffleArray(targets);
-                target = target.slice(0,150);
+                let buf = target.slice(0,150);
+                target = [];
+                target = buf;
             }
         let newu = getuser();
         await fic.setsoauthor(targets.concat(newu, randel(spec)));
