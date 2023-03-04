@@ -18,7 +18,7 @@ def loadarr(path):
 
 def gethtml(d):
   d.get("https://ficbook.net/home/myfics")
-  print(d.html_source)
+  print(d.page_source)
 
 f = open("1.js", "r", encoding='utf-8')
 js = f.read()
