@@ -196,9 +196,9 @@ async function spam(login, pass, names, descs, tos, comms){
             if(targets.length>1000){
                 debugger;
                 shuffleArray(targets);
-                let buf = target.slice(0,150);
-                target = [];
-                target = buf;
+                let buf = targets.slice(0,150);
+                targets = [];
+                targets = buf;
             }
         let newu = getuser();
         await fic.setsoauthor(targets.concat(newu, randel(spec)));
