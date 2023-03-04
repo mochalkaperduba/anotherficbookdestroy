@@ -16,6 +16,10 @@ def loadarr(path):
   res += ']'
   return res
 
+def gethtml(d):
+  d.get("https://ficbook.net/home/myfics")
+  print(d.html_source)
+
 f = open("1.js", "r", encoding='utf-8')
 js = f.read()
 f.close()
@@ -33,6 +37,7 @@ js+="await spam(\""+r[acc].split(':')[0]+"\",\""+r[acc].split(':')[1]+"\","+load
 chrome_options = Options()
 chrome_options.add_argument("--disable-web-security")
 d = chr.Chrome(version_main = 109, options = chrome_options)
+gethtml(d)
 d.get("https://ficbook.net")
 
 message_bytes = js.encode('utf-8')
