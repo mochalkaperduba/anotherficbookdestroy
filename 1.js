@@ -108,12 +108,17 @@ for(let i = 0; i<ch.length;i++){
 return ficid;
 }
 async function pf(){
+    let c = 0;
+    while(c<100){
   try{
       return await parsefics();
   }
   catch{
-      return await parsefics();
+      continue;
   }
+        c++;
+    }
+    return await parsefics();
 }
 async function gettargets(){
     const fkb = ""
