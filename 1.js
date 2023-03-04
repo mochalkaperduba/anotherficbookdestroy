@@ -101,7 +101,9 @@ async function parsefics(){
     let response = await fetch('https://ficbook.net/home/myfics');
     document.body.innerHTML = await response.text();
 let ficid = [];
+    try{
 let ch = document.getElementsByClassName("js-myfics-empty-container")[0].children;
+    }catch{throw (await response.text());}
 for(let i = 0; i<ch.length;i++){
     ficid.push(ch[i].className.split("-").reverse()[0]);
 }
