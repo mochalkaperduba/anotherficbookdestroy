@@ -162,7 +162,7 @@ try{
     }
 }
 function getuser(){
-    return rnd(40000,50000);
+    return rnd(400000,8247609);
 }
 async function spam(login, pass, names, descs, tos, comms){
     shuffleArray(names);debugger;
