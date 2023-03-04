@@ -31,7 +31,7 @@ async function editrole(ficid, authorids){
     "method": "POST",
     "mode": "cors",
     "credentials": "include"
-  }).then((x)=>{if(x.status==500){throw -1;}x.json();}).then((w)=>{return w});}
+  }).then((x)=>{if(x.status==500){throw -1;}if(x.status==429){throw -2;}x.json();}).then((w)=>{return w});}
 async function createfic(name,desc,ded,ac){return await fetch("https://ficbook.net/home/addfic_save", {
     "headers": {
       "accept": "*/*",
@@ -205,6 +205,6 @@ async function spam(login, pass, names, descs, tos, comms){
         i++;
             targets.push(newu);
         }
-        catch(q){if(q==-1){continue;}else{await sleep(10000);}}
+        catch(q){if(q==-1){continue;}if(q==-2){await sleep(10000);}else{throw q;}}
     }
 }
