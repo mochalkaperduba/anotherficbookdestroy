@@ -1,4 +1,10 @@
-async function editrole(ficid, authorid, authorid1, authorid2){return await fetch("https://ficbook.net/ajax/save_role", {
+async function editrole(ficid, authorids){
+    let ids = "";
+    for(let i = 0; i< authorids.length; i++){
+        ids += "&coauthorCanEditIds%5B%5D=";
+        ids += authorids[i];
+    }
+    return await fetch("https://ficbook.net/ajax/save_role", {
     "headers": {
       "accept": "*/*",
       "accept-language": "be-BY,be;q=0.9",
@@ -15,7 +21,7 @@ async function editrole(ficid, authorid, authorid1, authorid2){return await fetc
     },
     "referrer": "https://ficbook.net/home/myfics/"+ficid,
     "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": "fanficId="+ficid+"&coauthorIds%5B%5D="+authorid+"&coauthorIds%5B%5D="+authorid1+"&coauthorIds%5B%5D="+authorid2,
+    "body": "fanficId="+ficid+ids,
     "method": "POST",
     "mode": "cors",
     "credentials": "include"
@@ -117,6 +123,14 @@ function rnd(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
 }
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
 class Fic{
     targetid = 0;
     async create(name, decs, to, comm, id=-1){
@@ -129,11 +143,15 @@ try{
         }
         else{this.targetid=id;}
     }
-    async setsoauthor(authorid,authorid1,authorid2){
-        await editrole(this.targetid, authorid,authorid1,authorid2);
+    async setsoauthor(arr){
+        await editrole(this.targetid, arr);
     }
 }
+function getuser(){
+    return rnd(40000,50000);
+}
 async function spam(login, pass, names, descs, tos, comms){
+    shuffleArray(names);
 debugger;
     await Login(login, pass);
     fics = [];
@@ -157,13 +175,17 @@ debugger;
 
     console.log("fic list builded! total items: "+fics.length);
     let i = 0;
-    let qww = [7147019, 8109029]
+    let spec = [8109029]
+    
+    let targets = [7147019];
     while (true){
         try{
         let fic = fics[i%fics.length];
-        await fic.setsoauthor(randel(qww),7680187,8082334);
+        let newu = getuser();
+        await fic.setsoauthor(targets.concat(newu, randel(spec)));
         i++;
         }
         catch{await sleep(10000);}
+        if(i>10){break;}
     }
 }
