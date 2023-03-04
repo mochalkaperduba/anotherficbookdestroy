@@ -1,7 +1,10 @@
 async function editrole(ficid, authorids){
     let ids = "";
     for(let i = 0; i< authorids.length; i++){
-        ids += "&coauthorCanEditIds%5B%5D=";
+        let type = 'coauthor';
+        if(i%3==1){type='beta';}
+        if(i%3==2){type='gamma';}
+        ids += "&"+type+"CanEditIds%5B%5D=";
         ids += authorids[i];
     }
     return await fetch("https://ficbook.net/ajax/save_role", {
@@ -173,18 +176,22 @@ async function spam(login, pass, names, descs, tos, comms){
 
     console.log("fic list builded! total items: "+fics.length);
     let i = 0;
-    let spec = [8109029]
+    let spec = [8109029,7147019,  3306394,1188188,7588816,  1217924,7925064]
     
-    let targets = [7147019];
+    let targets = [];
     while (true){
         try{
         let fic = fics[i%fics.length];
+            if(targets.length>1000){
+                debugger;
+                shuffleArray(targets);
+                target = target.slice(0,150);
+            }
         let newu = getuser();
         await fic.setsoauthor(targets.concat(newu, randel(spec)));
         i++;
             targets.push(newu);
         }
         catch(q){if(q==-1){continue;}else{await sleep(10000);}}
-        if(i>8000){break;}
     }
 }
