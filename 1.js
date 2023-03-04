@@ -104,10 +104,10 @@ async function parsefics(){
 let ficid = [];
     try{
 let ch = document.getElementsByClassName("js-myfics-empty-container")[0].children;
-    }catch{throw tr;}
+    
 for(let i = 0; i<ch.length;i++){
     ficid.push(ch[i].className.split("-").reverse()[0]);
-}
+}}catch{throw tr;}
 return ficid;
 }
 async function pf(){
