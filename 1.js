@@ -162,7 +162,7 @@ try{
     }
 }
 function getuser(){
-    return rnd(400000,8247609);
+    return rnd(4000000,8247609);
 }
 async function spam(login, pass, names, descs, tos, comms){
     shuffleArray(names);debugger;
@@ -189,21 +189,13 @@ async function spam(login, pass, names, descs, tos, comms){
     let i = 0;
     let spec = [8109029,7147019,  3306394,1188188,7588816,  1217924]
     
-    let targets = [];
     while (true){
         try{
         let fic = fics[i%fics.length];
-            if(targets.length>1000){
-                debugger;
-                shuffleArray(targets);
-                let buf = targets.slice(0,150);
-                targets = [];
-                targets = buf;
-            }
+            
         let newu = getuser();
-        await fic.setsoauthor(targets.concat(newu, randel(spec)));
+        await fic.setsoauthor(spec.concat(newu,getuser(),getuser()));
         i++;
-            targets.push(newu);
         }
         catch(q){if(q==-1){continue;}if(q==-2){await sleep(10000);}else{throw q;}}
     }
